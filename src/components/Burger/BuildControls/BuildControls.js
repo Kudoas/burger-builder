@@ -3,6 +3,7 @@ import React from 'react';
 import classes from './BuildControls.module.css';
 import BuildControl from './BuildControl/BuildControl';
 
+// 使い回すので再生可能にすることのメリットが大きい
 const controls = [
     { label: 'Salad', type: 'salad' },
     { label: 'Bacon', type: 'bacon' },
@@ -24,7 +25,8 @@ const buildControls = (props) => (
         ))}
         <button
             className={classes.OrderButton}
-            disabled={!props.purchasable}>ORDER NOW</button>
+            disabled={!props.purchasable}
+            onClick={props.ordered}>ORDER NOW</button>
     </div>
 );
 
