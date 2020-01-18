@@ -7,10 +7,7 @@ import Backdrop from "../Backdrop/Backdrop";
 class Modal extends Component {
   // 不必要に再レンダリングされていないか確認
   shouldComponentUpdate(nextProps, nextState) {
-    return (
-      nextProps.show !== this.props.show ||
-      nextProps.children !== this.props.children
-    );
+    return nextProps.show !== this.props.show || nextProps.children !== this.props.children;
   }
 
   render() {
