@@ -4,8 +4,10 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import thunk from "redux-thunk";
+import styled from "@emotion/styled";
 
-import "./index.css";
+import ResetCSS from "./styles/reset-css";
+import IndexCSS from "./styles/index";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import burgerBuilderReducer from "./store/reducers/burgerBuilder";
@@ -25,10 +27,25 @@ const rootReducer = combineReducers({
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 
+const StyledApp = styled(App)`
+  body {
+    margin: 0;
+    font-family: "Amaranth", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  }
+`;
+
 const app = (
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <ResetCSS />
+      <IndexCSS />
+      <StyledApp />
     </BrowserRouter>
   </Provider>
 );
