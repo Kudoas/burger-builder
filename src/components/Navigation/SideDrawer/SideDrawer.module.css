@@ -1,7 +1,7 @@
 .SideDrawer {
   position: fixed;
-  width: 280px;
-  max-width: 70%;
+  width: 200px;
+  max-width: 50%;
   height: 100%;
   left: 0;
   top: 0;
@@ -9,7 +9,7 @@
   background-color: white;
   padding: 32px 16px;
   box-sizing: border-box;
-  transition: transform 0.3s ease-out;
+  transition: transform 0.2s ease-out;
 }
 
 @media (min-width: 500px) {
@@ -19,7 +19,7 @@
 }
 
 .Open {
-  transform: translateX(0);
+  transform: translateX(0%);
 }
 
 .Close {
@@ -27,6 +27,9 @@
 }
 
 .Logo {
+  text-align: center;
   height: 11%;
   margin-bottom: 32px;
+  border: 5px solid #99dbf3;
+  border-radius: 10%;
 }
