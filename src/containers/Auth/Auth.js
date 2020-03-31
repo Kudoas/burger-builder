@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import styled from "@emotion/styled";
 
 import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
 import Spinner from "../../components/UI/Spinner/Spinner";
-import classes from "./Auth.module.css";
+// import classes from "./Auth.module.css";
 import * as actions from "../../store/actions/index";
 import { updateObject, checkValidity } from "../../shared/utility";
 
@@ -112,8 +113,21 @@ class Auth extends Component {
       authRedirect = <Redirect to={this.props.authRedirectPath} />;
     }
 
+    const StyledComp = styled.div`
+      margin: 20px auto;
+      width: 80%;
+      text-align: center;
+      box-shadow: 0 2px 3px #ccc;
+      border: 1px solid #eee;
+      padding: 10px;
+      box-sizing: border-box;
+      @media (min-width: 600px) {
+        width: 500px;
+      }
+    `;
+
     return (
-      <div className={classes.Auth}>
+      <StyledComp>
         {authRedirect}
         {errorMessage}
         <form onSubmit={this.submitHandler}>
@@ -123,7 +137,7 @@ class Auth extends Component {
         <Button clicked={this.switchAuthModeHandler} btnType="Danger">
           SWITCH TO {this.state.isSignup ? "SIGNIN" : "SIGNUP"}
         </Button>
-      </div>
+      </StyledComp>
     );
   }
 }

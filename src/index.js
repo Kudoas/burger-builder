@@ -4,7 +4,6 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import thunk from "redux-thunk";
-import styled from "@emotion/styled";
 
 import ResetCSS from "./styles/reset-css";
 import IndexCSS from "./styles/index";
@@ -27,25 +26,12 @@ const rootReducer = combineReducers({
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 
-const StyledApp = styled(App)`
-  body {
-    margin: 0;
-    font-family: "Amaranth", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
-  }
-`;
-
 const app = (
   <Provider store={store}>
     <BrowserRouter>
       <ResetCSS />
       <IndexCSS />
-      <StyledApp />
+      <App />
     </BrowserRouter>
   </Provider>
 );
