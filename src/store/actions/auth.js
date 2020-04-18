@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const authStart = () => {
   return {
-    type: actionTypes.AUTH_START
+    type: actionTypes.AUTH_START,
   };
 };
 
@@ -12,14 +12,14 @@ export const authSuccess = (token, userId) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
     idToken: token,
-    userId: userId
+    userId: userId,
   };
 };
 
-export const authFail = error => {
+export const authFail = (error) => {
   return {
     type: actionTypes.AUTH_FAIL,
-    error: error
+    error: error,
   };
 };
 
@@ -28,12 +28,12 @@ export const logout = () => {
   localStorage.removeItem("expirationTime");
   localStorage.removeItem("userId");
   return {
-    type: actionTypes.AUTH_LOGOUT
+    type: actionTypes.AUTH_LOGOUT,
   };
 };
 
-export const checkAuthTimeout = expirationTime => {
-  return dispatch => {
+export const checkAuthTimeout = (expirationTime) => {
+  return (dispatch) => {
     setTimeout(() => {
       dispatch(logout());
     }, expirationTime * 1000);
@@ -41,12 +41,12 @@ export const checkAuthTimeout = expirationTime => {
 };
 
 export const auth = (email, password, isSignup) => {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(authStart());
     const authData = {
       email: email,
       password: password,
-      returnSecureToken: true
+      returnSecureToken: true,
     };
     let url =
       "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDfZqyPytIT6NTFcCgC5q_gwfsnhBwn3KY";
@@ -56,7 +56,7 @@ export const auth = (email, password, isSignup) => {
     }
     axios
       .post(url, authData)
-      .then(response => {
+      .then((response) => {
         const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
         localStorage.setItem("token", response.data.idToken);
         localStorage.setItem("expirationDate", expirationDate);
@@ -64,22 +64,22 @@ export const auth = (email, password, isSignup) => {
         dispatch(authSuccess(response.data.idToken, response.data.localId));
         dispatch(checkAuthTimeout(response.data.expiresIn));
       })
-      .catch(err => {
+      .catch((err) => {
         // errorMassageが分かりにくいので改良の余地あり
         dispatch(authFail(err.response.data.error));
       });
   };
 };
 
-export const setAuthRedirectPath = path => {
+export const setAuthRedirectPath = (path) => {
   return {
     type: actionTypes.SET_AUTH_REDIRECT_PATH,
-    path: path
+    path: path,
   };
 };
 
 export const authCheckState = () => {
-  return dispatch => {
+  return (dispatch) => {
     const token = localStorage.getItem("token");
     if (!token) {
       dispatch(logout());
