@@ -15,7 +15,7 @@ class Orders extends Component {
   render() {
     let orders = <Spinner />;
     if (!this.props.loading) {
-      orders = this.props.orders.map(order => (
+      orders = this.props.orders.map((order) => (
         <Order key={order.id} ingredients={order.ingredients} price={order.price} />
       ));
     }
@@ -23,18 +23,18 @@ class Orders extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     orders: state.order.orders,
     loading: state.order.loading,
     token: state.auth.token,
-    userId: state.auth.userId
+    userId: state.auth.userId,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onFetchOrders: (token, userId) => dispatch(actions.fetchOrders(token, userId))
+    onFetchOrders: (token, userId) => dispatch(actions.fetchOrders(token, userId)),
   };
 };
 
